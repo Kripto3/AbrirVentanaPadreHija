@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="openWin()">Open "myWindow"</button>
+    <button onclick="closeWin()">Close "myWindow"</button>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    var myWindow;
+    var config = {
+        'url': "VentanaDemo.html",
+        'titleWindow': "Censo de carga",
+        'width': 1024,
+        'height': 768
+    }
+
+    function openWin() {
+        console.log("abriendo ventana hija...");
+        centerAndOpenWin(config.url, config.titleWindow, config.width, config.height);
+    };
+
+
+    /*Funcion para Abrir y Centrar la ventana*/
+    function centerAndOpenWin(pageURL, pageTitle, popupWinWidth, popupWinHeight) {
+        var left = (screen.width - popupWinWidth) / 2;
+        var top = (screen.height - popupWinHeight) / 4;
+
+        myWindow = window.open(pageURL, pageTitle,
+            'resizable=yes, width=' + popupWinWidth +
+            ', height=' + popupWinHeight + ', top=' +
+            top + ', left=' + left);
+    }
+
+    /*Funcion padre que se ejecutará cuando la ventana hija cierre*/
+    function fatherFunction() {
+        console.log(" se ejecuta la funcion -> somefunction")
+    }
+
+
+    function closeWin() {
+        console.log("cerrando ventana hija...");
+        myWindow.close();
+    }
+</script>
+
+</html>
