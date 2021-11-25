@@ -1,4 +1,4 @@
-# Comunicacion entre ventanas Padre-Hija :lemon:
+# Comunicación entre ventanas Padre-Hija :lemon:
 
 Implementacion de como enviar datos desde una ventana hija hacia la pagina principal (Padre) utilizando Html y Jquery 3.3.1.
 
@@ -11,4 +11,8 @@ Puede ser usada para obtener datos necesarios en la carga de formularios u otro 
 ## Prueba ⚙️
 
 _Recomendado ejecutar el sistema utilizando Visual Studio Code + Live Server_
+
+
+## Autores ✒️
+* **Alejandro Jimenez** - *Trabajo Inicial* - [Kripto3](https://github.com/Kripto3)
 
