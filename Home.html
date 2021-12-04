@@ -14,10 +14,17 @@
         <button onclick="openWin()">Open "myWindow"</button>
         <button onclick="closeWin()">Close "myWindow"</button>
     </p>
+
+    <p>
+        <button onclick="openWin2()">Open "myWindow 2"</button>
+        <button onclick="closeWin()">Close "myWindow 2"</button>
+    </p>
     
 </body>
 <script>
     var myWindow;
+    var myWindow2;
+    
     var config = {
         'url': "VentanaHija.html",
         'titleWindow': "Ventana demo",
@@ -26,27 +33,53 @@
         'resizable': true,
     }
 
+    var config2 = {
+        'url': "VentanaHija.html"
+    }
+
     function openWin() {
         console.log("Abriendo ventana hija...");
-        centerAndOpenWin(config);
+        myWindow = centerAndOpenWin(config);
+    };
+
+    function openWin2() {
+        console.log("Abriendo ventana hija 2...");
+        myWindow2 = centerAndOpenWin(config2);
     };
 
 
     /*Funcion para Abrir y Centrar la ventana*/
     function centerAndOpenWin(config) {        
         
+        var defultConfig = {
+            'url': "",
+            'titleWindow': "Window1",
+            'width': 1024,
+            'height': 768,
+            'resizable': true,
+        }
+
+        //merge configs
+        for (var prop in defultConfig) {
+            if (defultConfig.hasOwnProperty(prop)) {
+                config[prop] = defultConfig[prop];
+            }
+        }    
+
         var left = (screen.width - config.width) / 2;
         var top = (screen.height - config.height) / 4;
 
         
-        myWindow = window.open(
-                    config.url, 
-                    config.titleWindow,
-                    'resizable='+config.resizable +
-                    ',width=' + config.width +
-                    ',height=' + config.height + 
-                    ',top=' + top + 
-                    ',left=' + left);
+        var childWindow = window.open(
+                        config.url, 
+                        config.titleWindow,
+                        'resizable='+config.resizable +
+                        ',width=' + config.width +
+                        ',height=' + config.height + 
+                        ',top=' + top + 
+                        ',left=' + left);
+
+        return childWindow;
 
     }
 
@@ -59,6 +92,11 @@
     function closeWin() {
         console.log("Cerrando ventana hija...");
         myWindow.close();
+    }
+
+    function closeWin2() {
+        console.log("Cerrando ventana hija...");
+        myWindow2.close();
     }
 </script>
 
