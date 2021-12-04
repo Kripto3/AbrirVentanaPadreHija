@@ -9,45 +9,94 @@
 </head>
 
 <body>
-    <button onclick="openWin()">Open "myWindow"</button>
-    <button onclick="closeWin()">Close "myWindow"</button>
+    <h1>Comunicación entre ventanas Padre-Hija</h1>
+    <p>
+        <button onclick="openWin()">Open "myWindow"</button>
+        <button onclick="closeWin()">Close "myWindow"</button>
+    </p>
+
+    <p>
+        <button onclick="openWin2()">Open "myWindow 2"</button>
+        <button onclick="closeWin()">Close "myWindow 2"</button>
+    </p>
+    
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
     var myWindow;
+    var myWindow2;
+    
     var config = {
         'url': "VentanaHija.html",
         'titleWindow': "Ventana demo",
         'width': 1024,
-        'height': 768
+        'height': 768,
+        'resizable': true,
+    }
+
+    var config2 = {
+        'url': "VentanaHija.html"
     }
 
     function openWin() {
-        console.log("abriendo ventana hija...");
-        centerAndOpenWin(config.url, config.titleWindow, config.width, config.height);
+        console.log("Abriendo ventana hija...");
+        myWindow = centerAndOpenWin(config);
+    };
+
+    function openWin2() {
+        console.log("Abriendo ventana hija 2...");
+        myWindow2 = centerAndOpenWin(config2);
     };
 
 
     /*Funcion para Abrir y Centrar la ventana*/
-    function centerAndOpenWin(pageURL, pageTitle, popupWinWidth, popupWinHeight) {
-        var left = (screen.width - popupWinWidth) / 2;
-        var top = (screen.height - popupWinHeight) / 4;
+    function centerAndOpenWin(config) {        
+        
+        var defultConfig = {
+            'url': "",
+            'titleWindow': "Window1",
+            'width': 1024,
+            'height': 768,
+            'resizable': true,
+        }
 
-        myWindow = window.open(pageURL, pageTitle,
-            'resizable=yes, width=' + popupWinWidth +
-            ', height=' + popupWinHeight + ', top=' +
-            top + ', left=' + left);
+        //merge configs
+        for (var prop in defultConfig) {
+            if (defultConfig.hasOwnProperty(prop)) {
+                config[prop] = defultConfig[prop];
+            }
+        }    
+
+        var left = (screen.width - config.width) / 2;
+        var top = (screen.height - config.height) / 4;
+
+        
+        var childWindow = window.open(
+                        config.url, 
+                        config.titleWindow,
+                        'resizable='+config.resizable +
+                        ',width=' + config.width +
+                        ',height=' + config.height + 
+                        ',top=' + top + 
+                        ',left=' + left);
+
+        return childWindow;
+
     }
 
     /*Funcion padre que se ejecutará cuando la ventana hija cierre*/
     function fatherFunction() {
-        console.log(" se ejecuta la funcion -> somefunction")
+        console.log("Se ejecuta la funcion -> somefunction")
     }
 
 
     function closeWin() {
-        console.log("cerrando ventana hija...");
+        console.log("Cerrando ventana hija...");
         myWindow.close();
+    }
+
+    function closeWin2() {
+        console.log("Cerrando ventana hija...");
+        myWindow2.close();
     }
 </script>
 
